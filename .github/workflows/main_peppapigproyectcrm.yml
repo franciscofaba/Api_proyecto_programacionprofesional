@@ -1,3 +1,11 @@
+name: Build and deploy Node.js, React, and Panel apps to Azure Web App - peppapigproyectcrm
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -92,3 +100,4 @@ jobs:
           app-name: 'peppapigproyectcrm'
           slot-name: 'Production'
           package: .
+

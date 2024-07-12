@@ -1,4 +1,4 @@
-name: Build and deploy Node.js app to Azure Web App - peppapigproyectcrm
+name: Build and deploy Node.js, React, and Panel apps to Azure Web App - peppapigproyectcrm
 
 on:
   push:
@@ -18,25 +18,52 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: npm install
+      # Step for api_node
+      - name: npm install for api_node
         run: |
           cd api_node
           npm install
 
-      - name: npm build
+      - name: npm build for api_node
         run: |
           cd api_node
           npm run build --if-present
 
-      - name: npm test
+      - name: npm test for api_node
         run: |
           cd api_node
           npm run test --if-present
+
+      # Step for React client
+      - name: npm install for client
+        run: |
+          cd client
+          npm install
+
+      - name: npm build for client
+        run: |
+          cd client
+          npm start
+
+      # Step for panel
+      - name: npm install for panel
+        run: |
+          cd panel
+          npm install
+
+      - name: npm build for panel
+        run: |
+          cd panel
+          npm start
 
       - name: Zip artifact for deployment
         run: |
           cd api_node
           zip -r ../release.zip .
+          cd ../client/build
+          zip -ur ../../release.zip .
+          cd ../../panel/build
+          zip -ur ../../release.zip .
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3

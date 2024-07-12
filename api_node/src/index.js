@@ -2,10 +2,10 @@ import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import mysql from 'mysql2/promise';
+import { PORT, DB_USER, DB_HOST, DB_PORT, DB_PASSWORD, DB_DATABASE } from './config.js'; // Importar configuraciones
 import indexRoutes from './routes/index.routes.js';
 import UserRoutes from './routes/User.routes.js';
 import loginRoutes from './routes/login.routes.js';
@@ -24,9 +24,6 @@ import EnviarEmail from './routes/EnviarEmail.routes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-// Cargar variables de entorno desde el archivo .env
-dotenv.config();
 
 const app = express();
 
@@ -51,11 +48,11 @@ app.use((req, res, next) => {
 
 // Configurar la conexión a la base de datos
 const dbConfig = {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    port: process.env.DB_PORT,
+    host: DB_HOST,
+    user: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_DATABASE,
+    port: DB_PORT,
 };
 
 async function connectToDatabase() {
@@ -110,10 +107,11 @@ app.get('/panel/*', (req, res) => {
 });
 
 // Iniciar el servidor
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
 
 export default app;
+
+
 

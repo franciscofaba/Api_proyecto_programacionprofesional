@@ -92,14 +92,4 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9E2A7B7C830B41F59B4198734C41B38B }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_602E266451F74EB9BF4D7B78DCD275C5 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_C27B5EC4ADFA497EBD0E5C4399E5CB11 }}
-
-      - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'peppapigproyectcrm'
-          slot-name: 'Production'
-          package: .
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9E2A7

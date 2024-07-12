@@ -43,7 +43,7 @@ jobs:
       - name: npm build for client
         run: |
           cd client
-          npm start
+          npm run build
 
       # Step for panel
       - name: npm install for panel
@@ -54,7 +54,7 @@ jobs:
       - name: npm build for panel
         run: |
           cd panel
-          npm start
+          npm run build
 
       - name: Zip artifact for deployment
         run: |
